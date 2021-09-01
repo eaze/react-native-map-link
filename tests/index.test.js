@@ -92,7 +92,7 @@ describe('showLocation', () => {
           dstaddr: '123 Test St, Orlando, 32826',
           app: 'google-maps',
         },
-        'comgooglemaps://&daddr=123%20Test%20St%2C%20Orlando%2C%2032826&directionsmode=driving',
+        'https://www.google.com/maps/dir/?api=1&destination=123%20Test%20St%2C%20Orlando%2C%2032826&directionsmode=driving',
       );
     });
   });

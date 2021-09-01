@@ -99,9 +99,9 @@ export async function showLocation(options) {
       break;
     case 'google-maps':
       if (dstaddr) {
-        url = prefixes['google-maps'];
+        url = 'https://www.google.com/maps/dir/?api=1';
         url += useSourceDestiny ? `&saddr=${sourceLatLng}` : '';
-        url += `&daddr=${encodedDstaddr}`;
+        url += `&destination=${encodedDstaddr}`;
         url += '&directionsmode=driving';
       } else {
         // Always using universal URL instead of URI scheme since the latter doesn't support all parameters (#155)
