@@ -175,11 +175,14 @@ export function checkOptions(options, prefixes) {
       'First parameter of `showLocation` should contain object with options.',
     );
   }
-  if (!('latitude' in options) || !('longitude' in options)) {
-    throw new MapsException(
-      'First parameter of `showLocation` should contain object with at least keys `latitude` and `longitude`.',
-    );
-  }
+  // if (
+  //   (!('dstaddr' in options) && !('latitude' in options)) ||
+  //   !('longitude' in options)
+  // ) {
+  //   throw new MapsException(
+  //     'First parameter of `showLocation` should contain object with at least keys `latitude` and `longitude` or `dstaddr`.',
+  //   );
+  // }
   if (
     'title' in options &&
     options.title &&

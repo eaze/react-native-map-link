@@ -7,31 +7,14 @@
 ---
 
 An easy way to open a location in a map app of the user's choice, based on the apps they have installed
-on their device. The app supports Apple Maps, Google Maps, Citymapper, Uber, and a dozen other apps.
+on their device. The app supports Apple Maps, Google Maps and Waze
 
 <details>
 <summary>Full list of supported apps</summary>
 
-* Apple Maps – `apple-maps`
-* Google Maps – `google-maps`
-* Citymapper – `citymapper`
-* Uber – `uber`
-* Lyft – `lyft`
-* The Transit App – `transit`
-* TruckMap – `truckmap`
-* Waze – `waze`
-* Yandex.Navi – `yandex`
-* Moovit – `moovit`
-* Yandex Taxi – `yandex-taxi`
-* Yandex Maps – `yandex-maps`
-* Kakao Map – `kakaomap`
-* Mapy.cz – `mapycz`
-* Maps.me – `maps-me`
-* OsmAnd - `osmand`
-* Gett - `gett`
-* Naver Map - `navermap`
-* 2GIS - `dgis`
-* Liftago - `liftago`
+- Apple Maps – `apple-maps`
+- Google Maps – `google-maps`
+- Waze – `waze`
 
 </details>
 
@@ -58,24 +41,7 @@ Just add this in your `Info.plist` depending on which apps you'd like to support
 <key>LSApplicationQueriesSchemes</key>
 <array>
     <string>comgooglemaps</string>
-    <string>citymapper</string>
-    <string>uber</string>
-    <string>lyft</string>
-    <string>transit</string>
-    <string>truckmap</string>
     <string>waze</string>
-    <string>yandexnavi</string>
-    <string>moovit</string>
-    <string>yandextaxi</string>
-    <string>yandexmaps</string>
-    <string>kakaomap</string>
-    <string>szn-mapy</string>
-    <string>mapsme</string>
-    <string>osmandmaps</string>
-    <string>gett</string>
-    <string>nmap</string>
-    <string>dgis</string>
-    <string>lftgpas</string>
 </array>
 ```
 
@@ -114,81 +80,13 @@ You can do so by coping the `<queries>` statement below, and pasting it in the t
   </intent>
   <intent>
     <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="citymapper" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="uber" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="lyft" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="transit" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="truckmap" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
     <data android:scheme="waze" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="yandexnavi" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="moovit" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="yandexmaps://maps.yandex." />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="yandextaxi" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="kakaomap" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="mapycz" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="mapsme" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="osmand.geo" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="gett" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="nmap" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="dgis" />
-  </intent>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="lftgpas" />
   </intent>
 </queries>
 ```
 
 If you're running into a 'unexpected element `<queries>` found in `<manifest>`' error, make sure you have an updated version of Gradle in your `android/build.gradle` file:
-  
+
 ```java
 classpath("com.android.tools.build:gradle:3.5.4")
 ```
@@ -204,40 +102,38 @@ More info [here](https://stackoverflow.com/a/67383641/1129689).
 
 </details>
 
-
 ## Usage
 
 Using the `showLocation` function will shown an action sheet on iOS and an alert on Android, without any custom styling:
 
 ```js
-import { showLocation } from 'react-native-map-link'
+import {showLocation} from 'react-native-map-link';
 
 showLocation({
-    latitude: 38.8976763,
-    longitude: -77.0387185,
-    sourceLatitude: -8.0870631,  // optionally specify starting location for directions
-    sourceLongitude: -34.8941619,  // not optional if sourceLatitude is specified
-    title: 'The White House',  // optional
-    googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
-    googlePlaceId: 'ChIJGVtI4by3t4kRr51d_Qm_x58',  // optionally specify the google-place-id
-    alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
-    dialogTitle: 'This is the dialog Title', // optional (default: 'Open in Maps')
-    dialogMessage: 'This is the amazing dialog Message', // optional (default: 'What app would you like to use?')
-    cancelText: 'This is the cancel button text', // optional (default: 'Cancel')
-    appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
-    naverCallerName: 'com.example.myapp' // to link into Naver Map You should provide your appname which is the bundle ID in iOS and applicationId in android.
-    // appTitles: { 'google-maps': 'My custom Google Maps title' } // optionally you can override default app titles
-    // app: 'uber'  // optionally specify specific app to use
-})
+  latitude: 38.8976763,
+  longitude: -77.0387185,
+  sourceLatitude: -8.0870631, // optionally specify starting location for directions
+  sourceLongitude: -34.8941619, // not optional if sourceLatitude is specified
+  title: 'The White House', // optional
+  googleForceLatLon: false, // optionally force GoogleMaps to use the latlon for the query instead of the title
+  googlePlaceId: 'ChIJGVtI4by3t4kRr51d_Qm_x58', // optionally specify the google-place-id
+  alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
+  dialogTitle: 'This is the dialog Title', // optional (default: 'Open in Maps')
+  dialogMessage: 'This is the amazing dialog Message', // optional (default: 'What app would you like to use?')
+  cancelText: 'This is the cancel button text', // optional (default: 'Cancel')
+  appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
+  naverCallerName: 'com.example.myapp', // to link into Naver Map You should provide your appname which is the bundle ID in iOS and applicationId in android.
+  // appTitles: { 'google-maps': 'My custom Google Maps title' } // optionally you can override default app titles
+  // app: 'uber'  // optionally specify specific app to use
+});
 ```
 
 Notes:
 
-* The `sourceLatitude/sourceLongitude` options only work if you specify both. Currently supports all apps except Waze.
-
+- The `sourceLatitude/sourceLongitude` options only work if you specify both. Currently supports all apps except Waze.
 
 ## More information
 
-* [Using this library with Expo](docs/expo.md)
-* [Alternative usage: styled popup](docs/popup.md)
-* [Adding support for new maps apps](docs/add-app.md)
+- [Using this library with Expo](docs/expo.md)
+- [Alternative usage: styled popup](docs/popup.md)
+- [Adding support for new maps apps](docs/add-app.md)
